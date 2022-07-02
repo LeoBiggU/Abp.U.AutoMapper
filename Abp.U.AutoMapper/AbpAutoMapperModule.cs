@@ -2,17 +2,16 @@
 using Abp.Localization;
 using Abp.Modules;
 using Abp.Reflection;
+using Abp.U.AutoMapper;
 using AutoMapper;
 using Castle.MicroKernel.Registration;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
-namespace Abp.U.AutoMapper
+namespace Abp.AutoMapper
 {
     [DependsOn(typeof(AbpKernelModule))]
-    public class AbpUAutoMapperModule : AbpModule
+    public class AbpAutoMapperModule : AbpModule
     {
         private readonly ITypeFinder _typeFinder;
 
@@ -20,7 +19,7 @@ namespace Abp.U.AutoMapper
 
         private static readonly object SyncObj = new object();
 
-        public AbpUAutoMapperModule(ITypeFinder typeFinder)
+        public AbpAutoMapperModule(ITypeFinder typeFinder)
         {
             _typeFinder = typeFinder;
         }
@@ -36,9 +35,13 @@ namespace Abp.U.AutoMapper
             // 将对象映射器的实现替换为本模块中定义
             Configuration.ReplaceService<ObjectMapping.IObjectMapper, AutoMapperObjectMapper>();
 
-            Configuration.Modules.AbpUAutoMapper().Configurators.Add(CreateCoreMappings);
+            // 添加自定义配置
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(CreateCoreMappings);
         }
 
+        /// <summary>
+        /// 这个方法在应用程序启动的最后被调用
+        /// </summary>
         public override void PostInitialize()
         {
             CreateMappings();
@@ -51,13 +54,15 @@ namespace Abp.U.AutoMapper
                 Action<IMapperConfigurationExpression> configurer = configuration =>
                 {
                     FindAndAutoMapTypes(configuration);
-                    foreach (var configurator in Configuration.Modules.AbpUAutoMapper().Configurators)
+                    // 根据模块配置创建映射
+                    foreach (var configurator in Configuration.Modules.AbpAutoMapper().Configurators)
                     {
                         configurator(configuration);
                     }
                 };
 
-                if (Configuration.Modules.AbpUAutoMapper().UseStaticMapper)
+                // 使用静态 Mapper 实例，是在 AutoMapper 类里面的静态实例
+                if (Configuration.Modules.AbpAutoMapper().UseStaticMapper)
                 {
                     //We should prevent duplicate mapping in an application, since Mapper is static.
                     if (!_createdMappingsBefore)
@@ -70,6 +75,7 @@ namespace Abp.U.AutoMapper
                         Component.For<IMapper>().Instance(Mapper.Instance).LifestyleSingleton()
                     );
                 }
+                // 不适用静态实例就需要 new 一个
                 else
                 {
                     var config = new MapperConfiguration(configurer);
@@ -80,8 +86,13 @@ namespace Abp.U.AutoMapper
             }
         }
 
+        /// <summary>
+        /// 寻找添加了自动映射特性的类型并自动创建映射配置
+        /// </summary>
+        /// <param name="configuration"></param>
         private void FindAndAutoMapTypes(IMapperConfigurationExpression configuration)
         {
+            // 找到定义了自动映射特性的类
             var types = _typeFinder.Find(type =>
             {
                 var typeInfo = type.GetTypeInfo();
@@ -92,13 +103,13 @@ namespace Abp.U.AutoMapper
 
             Logger.DebugFormat("Found {0} classes define auto mapping attributes", types.Length);
 
+            // 为符合条件的类依次创建映射配置
             foreach (var type in types)
             {
                 Logger.Debug(type.FullName);
                 configuration.CreateAutoAttributeMaps(type);
             }
         }
-
         /// <summary>
         /// 创建核心映射
         /// 当前只创建了本地化string映射到string
