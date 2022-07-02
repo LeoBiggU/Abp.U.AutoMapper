@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace Abp.U.AutoMapper
+namespace Abp.AutoMapper
 {
     internal static class AutoMapperConfigurationExtensions
     {

@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Abp.Collections.Extensions;
+using AutoMapper;
+using System;
 using System.Linq;
 using System.Reflection;
-using Abp.Collections.Extensions;
-using Abp.U.AutoMapper;
-using Abp.U.AutoMapper.Reflection;
-using AutoMapper;
-using AutoMapper.Configuration;
 
 namespace Abp.AutoMapper
 {

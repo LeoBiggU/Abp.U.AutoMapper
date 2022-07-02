@@ -2,7 +2,7 @@
 using Abp.Collections.Extensions;
 using AutoMapper;
 
-namespace Abp.U.AutoMapper
+namespace Abp.AutoMapper
 {
     public class AutoMapFromAttribute : AutoMapAttributeBase
     {

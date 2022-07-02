@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System;
 
-namespace Abp.U.AutoMapper
+namespace Abp.AutoMapper
 {
     public abstract class AutoMapAttributeBase : Attribute
     {

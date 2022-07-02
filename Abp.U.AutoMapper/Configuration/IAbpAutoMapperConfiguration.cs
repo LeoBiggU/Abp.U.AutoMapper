@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Abp.U.AutoMapper
+namespace Abp.AutoMapper
 {
     /// <summary>
     /// 本模块的配置项接口

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Abp.U.AutoMapper.Reflection
+namespace Abp.AutoMapper.Reflection
 {
     /// <summary>
     /// <see cref="Type"/> 类型扩展

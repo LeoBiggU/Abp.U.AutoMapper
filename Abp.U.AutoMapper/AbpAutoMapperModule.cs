@@ -2,7 +2,7 @@
 using Abp.Localization;
 using Abp.Modules;
 using Abp.Reflection;
-using Abp.U.AutoMapper;
+using Abp.AutoMapper;
 using AutoMapper;
 using Castle.MicroKernel.Registration;
 using System;

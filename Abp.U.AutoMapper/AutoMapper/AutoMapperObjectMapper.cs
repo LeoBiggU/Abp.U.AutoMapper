@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using IObjectMapper = Abp.ObjectMapping.IObjectMapper;
 
-namespace Abp.U.AutoMapper
+namespace Abp.AutoMapper
 {
     public class AutoMapperObjectMapper : IObjectMapper
     {

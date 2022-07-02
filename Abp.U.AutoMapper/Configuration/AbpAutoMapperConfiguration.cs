@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Abp.U.AutoMapper
+namespace Abp.AutoMapper
 {
     /// <summary>
     /// 本模块配置项

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.U.AutoMapper", "Abp.U.AutoMapper\Abp.U.AutoMapper.csproj", "{6C0BF1CC-EACD-4AE5-AF8E-6054E0BF8B7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abp.AutoMapper", "Abp.U.AutoMapper\Abp.AutoMapper.csproj", "{6C0BF1CC-EACD-4AE5-AF8E-6054E0BF8B7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

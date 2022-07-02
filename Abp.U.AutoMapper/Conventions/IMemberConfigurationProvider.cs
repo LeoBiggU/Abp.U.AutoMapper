@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Abp.U.AutoMapper
+namespace Abp.AutoMapper
 {
     public interface IMemberConfigurationProvider
     {
